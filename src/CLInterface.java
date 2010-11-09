@@ -1,35 +1,30 @@
-import java.util.Map;
-import java.util.TreeMap;
 
 
 public class CLInterface {
 
-	Map<String, CLOption> options = new TreeMap<String, CLOption>();
-	int optionsIndex = 1;
+	CLMenu mainMenu = new CLMenu("main");
+	CLMenu currentMenu;
+	
+	public CLInterface() {
+		currentMenu = mainMenu;
+	}
 	
 	public void addOption(CLOption option) {
-		options.put(Integer.toString(optionsIndex), option);
-		optionsIndex++;
-		
+		mainMenu.addOption(option);
 	}
 
 	public String getScreen() {
-		StringBuffer screen = new StringBuffer();
-		
-		for (String key: options.keySet()) {
-			CLOption op = options.get(key);
-			screen.append(key + " - ");
-			screen.append(op.getText());
-			screen.append("\n");
-		}
-		
-		screen.append("?>");
-		
-		return screen.toString();
+		return currentMenu.getMenuText();
 	}
 
 	public void choose(String key) {
-		options.get(key).run();
+		CLOption option = mainMenu.get(key);
+		if (option instanceof CLMenu) {
+			currentMenu = (CLMenu) option;
+		} else {
+			option.run();
+			
+		}
 	}
 
 }

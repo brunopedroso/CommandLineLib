@@ -83,7 +83,29 @@ public class CommandLineLibTest {
 		Assert.assertEquals("should have executed the option", 1,list.size());
 	}
 	
+	
+	@Test
+	public void shouldShowTheSubmenu() {
+		
+		CLInterface cl = new CLInterface();
+		
+		CLMenu menu = new CLMenu("option one");
+		menu.addOption(new CLOption("sub option one"));
+		menu.addOption(new CLOption("sub option two"));
+		
+		cl.addOption(menu);
+		
+		cl.choose("1");
+		
+		String expectedScreen =   "1 - sub option one\n"
+								+ "2 - sub option two\n"
+								+ "?>";
+		
+		Assert.assertEquals(expectedScreen, cl.getScreen());
 
-	//TODO should show the menu again
+		
+	}
+	
+	//TODO should show the menu again 
 
 }
