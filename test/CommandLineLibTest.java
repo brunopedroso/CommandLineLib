@@ -17,7 +17,10 @@ public class CommandLineLibTest {
 		
 		cl.addOption(firstOption);
 		
-		Assert.assertEquals("1 - " + optionText + "\n", cl.getScreen());
+		String expectedScreen = "1 - " + optionText + "\n"
+								+ "?>";
+		
+		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
 	}
 	
@@ -36,7 +39,8 @@ public class CommandLineLibTest {
 		cl.addOption(secondOption);
 		
 		String expectedScreen = "1 - " + optionText + "\n" 
-							+   "2 - " + optionText2 + "\n";
+							  + "2 - " + optionText2 + "\n"
+							  + "?>";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
@@ -79,4 +83,7 @@ public class CommandLineLibTest {
 		Assert.assertEquals("should have executed the option", 1,list.size());
 	}
 	
+
+	//TODO should show the menu again
+
 }

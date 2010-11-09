@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -26,12 +23,13 @@ public class CLInterface {
 			screen.append("\n");
 		}
 		
+		screen.append("?>");
+		
 		return screen.toString();
 	}
 
 	public void choose(String key) {
 		options.get(key).run();
-		
 	}
 
 }
