@@ -18,7 +18,7 @@ public class CommandLineLibTest {
 		cl.addOption(firstOption);
 		
 		String expectedScreen = "1 - " + optionText + "\n"
-								+ "?>";
+								+ "?> ";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
@@ -40,7 +40,7 @@ public class CommandLineLibTest {
 		
 		String expectedScreen = "1 - " + optionText + "\n" 
 							  + "2 - " + optionText2 + "\n"
-							  + "?>";
+							  + "?> ";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
@@ -93,7 +93,7 @@ public class CommandLineLibTest {
 		
 		String expectedScreen =   "Invalid option!\n"
 								+ "1 - option one\n" 
-								+ "?>";
+								+ "?> ";
 
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 
@@ -114,7 +114,7 @@ public class CommandLineLibTest {
 		
 		String expectedScreen =   "1 - sub option one\n"
 								+ "2 - sub option two\n"
-								+ "?>";
+								+ "?> ";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 
@@ -156,13 +156,13 @@ public class CommandLineLibTest {
 		CLInterface cl = new CLInterface();
 		cl.addOption(menu);
 		
-		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?> ",cl.getScreen());
 		
 		cl.choose("1");
-		Assert.assertEquals("", menu.getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("", menu.getMenuText() + "?> ",cl.getScreen());
 		
 		cl.choose("2");
-		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?> ",cl.getScreen());
 		
 	}
 	
@@ -179,16 +179,16 @@ public class CommandLineLibTest {
 		CLInterface cl = new CLInterface();
 		cl.addOption(menu);
 		
-		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?> ",cl.getScreen());
 		
 		cl.choose("1");
-		Assert.assertEquals("", menu.getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("", menu.getMenuText() + "?> ",cl.getScreen());
 		
 		cl.choose("1");
-		Assert.assertEquals("", submenu.getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("", submenu.getMenuText() + "?> ",cl.getScreen());
 		
 		cl.choose("2");
-		Assert.assertEquals("should bo back to the main menu", cl.getMainMenu().getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("should bo back to the main menu", cl.getMainMenu().getMenuText() + "?> ",cl.getScreen());
 		
 	}
 	
@@ -215,11 +215,11 @@ public class CommandLineLibTest {
 		
 		cl.choose("1");
 		Assert.assertEquals("should not have executed the option yet", 0,list.size());
-		Assert.assertEquals("", subMenu.getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("", subMenu.getMenuText() + "?> ",cl.getScreen());
 		
 		cl.choose("1");
 		Assert.assertEquals("should not have executed the option yet", 0,list.size());
-		Assert.assertEquals("", subSubMenu.getMenuText() + "?>",cl.getScreen());
+		Assert.assertEquals("", subSubMenu.getMenuText() + "?> ",cl.getScreen());
 		
 		cl.choose("2");
 		Assert.assertEquals("should have executed the option", 1,list.size());
@@ -227,4 +227,7 @@ public class CommandLineLibTest {
 	}
 	
 
+	//TODO message in menus
+	//TODO option to exit in menus
+	
 }

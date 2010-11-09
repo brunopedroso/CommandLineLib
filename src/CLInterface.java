@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 
 
 public class CLInterface {
@@ -24,7 +28,7 @@ public class CLInterface {
 		}
 		
 		screen.append(currentMenu.getMenuText());
-		screen.append("?>");
+		screen.append("?> ");
 		
 		return screen.toString();
 	}
@@ -49,6 +53,15 @@ public class CLInterface {
 
 	public CLMenu getMainMenu() {
 		return mainMenu;
+	}
+	
+	public void run() throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		while(true) {
+			System.out.print(getScreen());
+			String option = reader.readLine();
+			choose(option);
+		}
 	}
 
 }
