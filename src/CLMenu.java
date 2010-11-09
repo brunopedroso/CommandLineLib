@@ -28,8 +28,6 @@ public class CLMenu extends CLOption {
 			screen.append("\n");
 		}
 		
-		screen.append("?>");
-		
 		return screen.toString();	}
 
 	public CLOption get(String key) {

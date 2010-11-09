@@ -5,6 +5,8 @@ public class CLInterface {
 	CLMenu mainMenu = new CLMenu("main");
 	CLMenu currentMenu;
 	
+	String message;
+	
 	public CLInterface() {
 		currentMenu = mainMenu;
 	}
@@ -14,15 +16,32 @@ public class CLInterface {
 	}
 
 	public String getScreen() {
-		return currentMenu.getMenuText();
+		StringBuffer screen = new StringBuffer();
+		
+		if (message != null) {
+			 screen.append(message + "\n");
+			 message = null;
+		}
+		
+		screen.append(currentMenu.getMenuText());
+		screen.append("?>");
+		
+		return screen.toString();
 	}
 
 	public void choose(String key) {
-		CLOption option = mainMenu.get(key);
-		if (option instanceof CLMenu) {
-			currentMenu = (CLMenu) option;
+		CLOption option = currentMenu.get(key);
+		if (option != null) {
+			
+			if (option instanceof CLMenu) {
+				currentMenu = (CLMenu) option;
+			} else {
+				option.run();
+			}
+			
 		} else {
-			option.run();
+			
+			message = "Invalid option!";
 			
 		}
 	}

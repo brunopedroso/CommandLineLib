@@ -83,6 +83,21 @@ public class CommandLineLibTest {
 		Assert.assertEquals("should have executed the option", 1,list.size());
 	}
 	
+	@Test
+	public void shouldShowAMessageIfUndefindedOption() {
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(new CLOption("option one"));
+		
+		cl.choose("2");
+		
+		String expectedScreen =   "Invalid option!\n"
+								+ "1 - option one\n" 
+								+ "?>";
+
+		Assert.assertEquals(expectedScreen, cl.getScreen());
+
+	}
 	
 	@Test
 	public void shouldShowTheSubmenu() {
@@ -103,9 +118,33 @@ public class CommandLineLibTest {
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 
+	}
+	
+	@Test
+	public void shouldExecuteTheSubmenuOption() {
+		
+		CLInterface cl = new CLInterface();
+		
+		final ArrayList<String> list = new ArrayList<String>(); 
+		
+		CLMenu menu = new CLMenu("option one");
+		menu.addOption(new CLOption("sub option one"));
+		menu.addOption(new CLOption("sub option two") {
+			@Override
+			public void run() {
+				list.add("executed!");
+			}
+		});
+		
+		cl.addOption(menu);
+		
+		cl.choose("1");
+		Assert.assertEquals("should not have executed the option yet", 0,list.size());
+		
+		cl.choose("2");
+		Assert.assertEquals("should have executed the option", 1,list.size());
 		
 	}
 	
-	//TODO should show the menu again 
 
 }
