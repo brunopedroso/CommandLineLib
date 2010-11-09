@@ -72,7 +72,7 @@ public class CLInterface {
 	
 	public void run() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		while(true) {
+		while(!finished()) {
 			System.out.print(getScreen());
 			String option = reader.readLine();
 			choose(option);

@@ -18,6 +18,7 @@ public class CLMenu extends CLOption {
 		super(optionText);
 		exitOption = new CLOption("Cancel");
 		this.menuMessage = message;
+		options.put(Integer.toString(optionsIndex), exitOption);
 	}
 
 	public void addOption(CLOption option) {

@@ -261,6 +261,21 @@ public class CommandLineLibTest {
 	}
 	
 	@Test
+	public void shouldHaveTheCancelOptionEvenWithoutOtherOptions() {
+		
+		CLMenu menu = new CLMenu("menu");
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(menu);
+		
+		cl.choose("1");
+		
+		String expected = "1 - Cancel\n?> ";
+		Assert.assertEquals("", expected, cl.getScreen());
+		
+	}
+	
+	@Test
 	public void shouldReturnToSubMenuWhenCancelIsChoosenInSubSub() {
 		
 		CLMenu subsubmenu = new CLMenu("subsubmenu");
@@ -318,5 +333,8 @@ public class CommandLineLibTest {
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
 	}
+
+	
+	//TODO forms
 	
 }
