@@ -281,8 +281,42 @@ public class CommandLineLibTest {
 		
 	}
 	
+	@Test
+	public void shouldShowTheWelcomeMessage() {
+		
+		CLInterface cl = new CLInterface("Hi, this is the welcome message");
+		
+		CLOption firstOption = new CLOption("option one"); 
+		
+		cl.addOption(firstOption);
+		
+		String expectedScreen =	  "Hi, this is the welcome message\n"   
+								+ "1 - option one\n"
+								+ "2 - Cancel\n"
+								+ "?> ";
+		
+		Assert.assertEquals(expectedScreen, cl.getScreen());
+		
+	}
 	
-	//TODO message in menus
-	//TODO option to Cancel in menus
+	@Test
+	public void shouldShowTheMenuMessage() {
+		
+		CLMenu submenu = new CLMenu("submenu", "Please choose one of the options");
+		submenu.addOption(new CLOption("first option"));
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(submenu);
+		
+		cl.choose("1");
+		
+		String expectedScreen =	  "Please choose one of the options\n"
+								+ "1 - first option\n"
+								+ "2 - Cancel\n"
+								+ "?> ";
+		
+		Assert.assertEquals(expectedScreen, cl.getScreen());
+		
+	}
 	
 }

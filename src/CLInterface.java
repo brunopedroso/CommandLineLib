@@ -11,9 +11,14 @@ public class CLInterface {
 	private boolean finished;
 	
 	public CLInterface() {
-		currentMenu = mainMenu;
+		this(null);
 	}
 	
+	public CLInterface(String welcomeMessage) {
+		mainMenu = new CLMenu("main", welcomeMessage);
+		currentMenu = mainMenu;
+	}
+
 	public void addOption(CLOption option) {
 		mainMenu.addOption(option);
 	}

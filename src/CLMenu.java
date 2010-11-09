@@ -8,10 +8,16 @@ public class CLMenu extends CLOption {
 	int optionsIndex = 1;
 	private CLOption exitOption;
 	private CLMenu superMenu;
+	private String menuMessage;
 
 	public CLMenu(String optionText) {
+		this(optionText, null);
+	}
+
+	public CLMenu(String optionText, String message) {
 		super(optionText);
 		exitOption = new CLOption("Cancel");
+		this.menuMessage = message;
 	}
 
 	public void addOption(CLOption option) {
@@ -34,6 +40,11 @@ public class CLMenu extends CLOption {
 	
 	public String getMenuText() {
 		StringBuffer screen = new StringBuffer();
+		
+		if (menuMessage != null) {
+			screen.append(menuMessage);
+			screen.append("\n");
+		}
 		
 		for (String key: options.keySet()) {
 			CLOption op = options.get(key);
