@@ -146,5 +146,85 @@ public class CommandLineLibTest {
 		
 	}
 	
+	@Test
+	public void shouldReturnToMainMenuAfterOptionExecution() {
+		
+		CLMenu menu = new CLMenu("option one");
+		menu.addOption(new CLOption("sub option one"));
+		menu.addOption(new CLOption("sub option two"));
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(menu);
+		
+		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?>",cl.getScreen());
+		
+		cl.choose("1");
+		Assert.assertEquals("", menu.getMenuText() + "?>",cl.getScreen());
+		
+		cl.choose("2");
+		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?>",cl.getScreen());
+		
+	}
+	
+	@Test
+	public void shouldReturnToMainMenuAfterSubOptionExecution() {
+		
+		CLMenu submenu = new CLMenu("option one-one");
+		submenu.addOption(new CLOption("sub option one-one-one"));
+		submenu.addOption(new CLOption("sub option one-one-two"));
+		
+		CLMenu menu = new CLMenu("option one");
+		menu.addOption(submenu);
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(menu);
+		
+		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?>",cl.getScreen());
+		
+		cl.choose("1");
+		Assert.assertEquals("", menu.getMenuText() + "?>",cl.getScreen());
+		
+		cl.choose("1");
+		Assert.assertEquals("", submenu.getMenuText() + "?>",cl.getScreen());
+		
+		cl.choose("2");
+		Assert.assertEquals("should bo back to the main menu", cl.getMainMenu().getMenuText() + "?>",cl.getScreen());
+		
+	}
+	
+	@Test
+	public void shouldExecuteTheSubSubmenuOption() {
+		
+		CLInterface cl = new CLInterface();
+		
+		final ArrayList<String> list = new ArrayList<String>(); 
+		
+		CLMenu subSubMenu = new CLMenu("option one-one");
+		subSubMenu.addOption(new CLOption("option one-one-one"));
+		subSubMenu.addOption(new CLOption("option one-one-two") {
+			@Override
+			public void run() {
+				list.add("executed!");
+			}
+		});
+		
+		CLMenu subMenu = new CLMenu("option one");
+		subMenu.addOption(subSubMenu);
+		
+		cl.addOption(subMenu);
+		
+		cl.choose("1");
+		Assert.assertEquals("should not have executed the option yet", 0,list.size());
+		Assert.assertEquals("", subMenu.getMenuText() + "?>",cl.getScreen());
+		
+		cl.choose("1");
+		Assert.assertEquals("should not have executed the option yet", 0,list.size());
+		Assert.assertEquals("", subSubMenu.getMenuText() + "?>",cl.getScreen());
+		
+		cl.choose("2");
+		Assert.assertEquals("should have executed the option", 1,list.size());
+		
+	}
+	
 
 }

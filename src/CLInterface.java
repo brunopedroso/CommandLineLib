@@ -37,6 +37,7 @@ public class CLInterface {
 				currentMenu = (CLMenu) option;
 			} else {
 				option.run();
+				currentMenu = mainMenu;
 			}
 			
 		} else {
@@ -44,6 +45,10 @@ public class CLInterface {
 			message = "Invalid option!";
 			
 		}
+	}
+
+	public CLMenu getMainMenu() {
+		return mainMenu;
 	}
 
 }
