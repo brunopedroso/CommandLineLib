@@ -2,14 +2,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
-
 public class CLInterface {
 
 	CLMenu mainMenu = new CLMenu("main");
 	CLMenu currentMenu;
 	
 	String message;
+	private boolean finished;
 	
 	public CLInterface() {
 		currentMenu = mainMenu;
@@ -39,6 +38,17 @@ public class CLInterface {
 			
 			if (option instanceof CLMenu) {
 				currentMenu = (CLMenu) option;
+				
+			} else if (option.getText().equals("Cancel")) {
+				
+				if (currentMenu == mainMenu) {
+					this.finished = true;
+					
+				} else {
+					currentMenu = currentMenu.getSuperMenu();
+				}
+				
+				
 			} else {
 				option.run();
 				currentMenu = mainMenu;
@@ -62,6 +72,10 @@ public class CLInterface {
 			String option = reader.readLine();
 			choose(option);
 		}
+	}
+
+	public boolean finished() {
+		return finished;
 	}
 
 }

@@ -17,7 +17,8 @@ public class CommandLineLibTest {
 		
 		cl.addOption(firstOption);
 		
-		String expectedScreen = "1 - " + optionText + "\n"
+		String expectedScreen =   "1 - " + optionText + "\n"
+								+ "2 - Cancel\n"
 								+ "?> ";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
@@ -40,6 +41,7 @@ public class CommandLineLibTest {
 		
 		String expectedScreen = "1 - " + optionText + "\n" 
 							  + "2 - " + optionText2 + "\n"
+							  + "3 - Cancel\n"
 							  + "?> ";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
@@ -89,10 +91,11 @@ public class CommandLineLibTest {
 		CLInterface cl = new CLInterface();
 		cl.addOption(new CLOption("option one"));
 		
-		cl.choose("2");
+		cl.choose("3");
 		
 		String expectedScreen =   "Invalid option!\n"
 								+ "1 - option one\n" 
+								+ "2 - Cancel\n"
 								+ "?> ";
 
 		Assert.assertEquals(expectedScreen, cl.getScreen());
@@ -114,6 +117,7 @@ public class CommandLineLibTest {
 		
 		String expectedScreen =   "1 - sub option one\n"
 								+ "2 - sub option two\n"
+								+ "3 - Cancel\n"
 								+ "?> ";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
@@ -226,8 +230,59 @@ public class CommandLineLibTest {
 		
 	}
 	
-
+	@Test
+	public void shouldFinishWhenCancelTheMainMenu() {
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(new CLOption("first option"));
+		
+		Assert.assertFalse(cl.finished());
+		
+		cl.choose("2"); // exit
+		Assert.assertTrue("should have finished", cl.finished());
+		
+	}
+	
+	@Test
+	public void shouldReturnToMainMenuWhenCancelIsChoosenInSub() {
+		
+		CLMenu menu = new CLMenu("menu");
+		menu.addOption(new CLOption("first option"));
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(menu);
+		
+		cl.choose("1");
+		cl.choose("2"); // exit
+		
+		Assert.assertFalse("should not have finished", cl.finished());
+		Assert.assertEquals("", cl.getMainMenu().getMenuText() + "?> ",cl.getScreen());
+		
+	}
+	
+	@Test
+	public void shouldReturnToSubMenuWhenCancelIsChoosenInSubSub() {
+		
+		CLMenu subsubmenu = new CLMenu("subsubmenu");
+		subsubmenu.addOption(new CLOption("first option"));
+		
+		CLMenu submenu = new CLMenu("submenu");
+		submenu.addOption(subsubmenu);
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(submenu);
+		
+		cl.choose("1");
+		cl.choose("1");
+		cl.choose("2"); // exit
+		
+		Assert.assertFalse("should not have finished", cl.finished());
+		Assert.assertEquals("", submenu.getMenuText() + "?> ",cl.getScreen());
+		
+	}
+	
+	
 	//TODO message in menus
-	//TODO option to exit in menus
+	//TODO option to Cancel in menus
 	
 }
