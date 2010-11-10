@@ -35,12 +35,14 @@ public class CLForm extends CLCompositeOption {
 		return questions;
 	}
 
-	public void answer(String answer) {
+	public CLCompositeOption answer(String answer) {
 		questions.get(currentQuestion).answer(answer);
 		currentQuestion++;
 		if (currentQuestion==questions.size()) {
 			run();
+			return null;
 		}
+		return this;
 	}
 
 

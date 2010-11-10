@@ -84,7 +84,7 @@ public class CLFormTest {
 	}
 	
 	@Test
-	public void shouldFinishTheFormAfterLastQuestion() {
+	public void shouldRunTheFormAfterLastQuestion() {
 		
 		cl.choose("1");
 		Assert.assertFalse(executed);
@@ -97,7 +97,21 @@ public class CLFormTest {
 		Assert.assertTrue(executed);
 		
 	}
+	
+	@Test
+	public void shouldReturnToMainMenuAfterLastAnswer() {
+		
+		cl.choose("1");
+		Assert.assertFalse(executed);
+		
+		cl.choose("Bruno");
+		Assert.assertFalse(executed);
+		
+		cl.choose("32");
+		
+		Assert.assertEquals(cl.getMainMenu().getText() + "?> ", cl.getScreen());
+		
+	}
 
-	//TODO finish after last question, execute action and return to main menu
 	
 }

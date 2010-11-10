@@ -42,6 +42,7 @@ public class CLInterface {
 		return screen.toString();
 	}
 
+	//TODO should call answer() ?
 	public void choose(String key) {
 		
 		//TODO shouldnt each component know how to do its work?
@@ -77,7 +78,10 @@ public class CLInterface {
 			}
 			
 		} else if (currentComposite instanceof CLForm) {
-			((CLForm)currentComposite).answer(key);
+			currentComposite = ((CLForm)currentComposite).answer(key);
+			if (currentComposite==null) {
+				currentComposite = mainMenu;
+			}
 		}
 		
 	}
