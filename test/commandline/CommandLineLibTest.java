@@ -90,24 +90,6 @@ public class CommandLineLibTest {
 		Assert.assertEquals("should have executed the option", 1,list.size());
 	}
 	
-	@Test
-	public void shouldShowAMessageIfUndefindedOption() {
-		
-		CLInterface cl = new CLInterface();
-		cl.addOption(new CLOption("option one"));
-		
-		cl.answer("3");
-		
-		String expectedScreen =   "Invalid option!\n"
-								+ "1 - option one\n" 
-								+ "2 - Cancel\n"
-								+ "?> ";
-
-		Assert.assertEquals(expectedScreen, cl.getScreen());
-
-	}
-	
-
 	
 	@Test
 	public void shouldShowTheWelcomeMessage() {
@@ -147,7 +129,4 @@ public class CommandLineLibTest {
 		
 	}
 
-	
-	//TODO forms
-	
 }

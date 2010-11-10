@@ -206,4 +206,38 @@ public class CLMenuTest {
 		
 	}	
 	
+	@Test
+	public void shouldShowAMessageIfUndefindedOption() {
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(new CLOption("option one"));
+		
+		cl.answer("3");
+		
+		String expectedScreen =   "Invalid option!\n"
+								+ "1 - option one\n" 
+								+ "2 - Cancel\n"
+								+ "?> ";
+
+		Assert.assertEquals(expectedScreen, cl.getScreen());
+
+	}
+	
+	@Test
+	public void shouldShowAMessageIfNotANumberAnswer() {
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(new CLOption("option one"));
+		
+		cl.answer("notAnumber");
+		
+		String expectedScreen =   "Invalid option!\n"
+								+ "1 - option one\n" 
+								+ "2 - Cancel\n"
+								+ "?> ";
+
+		Assert.assertEquals(expectedScreen, cl.getScreen());
+
+	}
+	
 }

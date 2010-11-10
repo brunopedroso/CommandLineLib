@@ -75,10 +75,25 @@ public class CLInterface {
 	public void run() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		while(!finished()) {
+			
+			clearScreen();
+			
 			System.out.print(getScreen());
 			String option = reader.readLine();
 			answer(option);
 		}
+	}
+
+	private void clearScreen() {
+//		char[] cls = new char[100];
+//		for(int i=0;i<100;i++)
+//			cls[i]='\n';
+//			
+//		System.out.println(String.valueOf(cls));
+		
+		System.out.println("\033[2J");
+		System.out.println("\033[0;0H");
+		
 	}
 
 	public boolean finished() {

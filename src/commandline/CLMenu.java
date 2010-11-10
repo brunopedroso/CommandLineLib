@@ -56,11 +56,16 @@ public class CLMenu extends CLCompositeOption {
 	@Override
 	public CLCompositeOption answer(String key) {
 		
-		// cancel option choosen
-		if (Integer.parseInt(key) == optionsIndex) {
-			return getSuperMenu();
-			
-		} 
+		try {
+			// cancel option choosen
+			if (Integer.parseInt(key) == optionsIndex) {
+				return getSuperMenu();
+			} 
+		} catch (NumberFormatException e) {
+			message = "Invalid option!";
+			return this;
+		}
+		
 		
 		CLOption option =  options.get(key);
 		

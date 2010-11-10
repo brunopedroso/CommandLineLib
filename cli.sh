@@ -1,1 +1,1 @@
-java -cp bin TestCLInterface
+java -cp bin commandline.TestCLInterface
