@@ -7,8 +7,6 @@ public class CLMenu extends CLCompositeOption {
 	Map<String, CLOption> options = new TreeMap<String, CLOption>();
 	int optionsIndex = 1;
 	
-	//TODO is there a better way?
-	private CLOption exitOption = new CLOption("Cancel");
 	private String message;
 	
 	public CLMenu(String optionText) {
@@ -17,7 +15,6 @@ public class CLMenu extends CLCompositeOption {
 
 	public CLMenu(String optionText, String text) {
 		super(optionText, text);
-		options.put(Integer.toString(optionsIndex), exitOption);
 	}
 
 	public void addOption(CLOption option) {
@@ -26,7 +23,6 @@ public class CLMenu extends CLCompositeOption {
 		}
 		options.put(Integer.toString(optionsIndex), option);
 		optionsIndex++;
-		options.put(Integer.toString(optionsIndex), exitOption);
 		
 	}
 
@@ -52,34 +48,37 @@ public class CLMenu extends CLCompositeOption {
 			screen.append("\n");
 		}
 		
+		screen.append(optionsIndex + " - ");
+		screen.append("Cancel");
+		screen.append("\n");
+		
 		return screen.toString();	}
 
 	@Override
 	public CLCompositeOption answer(String key) {
 		
+		// cancel option choosen
+		if (Integer.parseInt(key) == optionsIndex) {
+			return getSuperMenu();
+			
+		} 
+		
 		CLOption option =  options.get(key);
 		
-		if (option != null) {
-			
-			if (option instanceof CLCompositeOption) {
-				return (CLCompositeOption) option;
-				
-			//TODO can it be done in a smarter way? finished?
-			} else if (option.getName().equals("Cancel")) {
-				return getSuperMenu();
-				
-			} else {
-				option.run();
-				return null;
-				
-			}
-			
-		} else {
-			
+		if (option == null) {
 			message = "Invalid option!";
 			return this;
+		}
+			
+		if (option instanceof CLCompositeOption) {
+			return (CLCompositeOption) option;
+			
+		} else {
+			option.run();
+			return null;
 			
 		}
+			
 		
 	}
 
