@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class CLInterface {
 
@@ -9,6 +10,9 @@ public class CLInterface {
 	
 	String message;
 	private boolean finished;
+	private CLForm currentForm;
+	private int currentQuestion;
+	private CLQuestion question;
 	
 	public CLInterface() {
 		this(null);
@@ -31,18 +35,29 @@ public class CLInterface {
 			 message = null;
 		}
 		
-		screen.append(currentMenu.getMenuText());
+		if (currentForm!= null) {
+			screen.append(currentForm.getText());
+		} else {
+			screen.append(currentMenu.getMenuText());
+		}
+		
+		
 		screen.append("?> ");
 		
 		return screen.toString();
 	}
 
 	public void choose(String key) {
+		
 		CLOption option = currentMenu.get(key);
 		if (option != null) {
 			
 			if (option instanceof CLMenu) {
 				currentMenu = (CLMenu) option;
+				
+			} else if (option instanceof CLForm) {
+				
+				currentForm = (CLForm) option;
 				
 			} else if (option.getText().equals("Cancel")) {
 				
@@ -52,7 +67,6 @@ public class CLInterface {
 				} else {
 					currentMenu = currentMenu.getSuperMenu();
 				}
-				
 				
 			} else {
 				option.run();
@@ -64,6 +78,7 @@ public class CLInterface {
 			message = "Invalid option!";
 			
 		}
+		
 	}
 
 	public CLMenu getMainMenu() {
