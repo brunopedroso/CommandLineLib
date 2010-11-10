@@ -6,13 +6,11 @@ import java.util.List;
 public class CLInterface {
 
 	CLMenu mainMenu = new CLMenu("main");
-	CLMenu currentMenu;
+	
+	CLCompositeOption currentComposite;
 	
 	String message;
 	private boolean finished;
-	private CLForm currentForm;
-	private int currentQuestion;
-	private CLQuestion question;
 	
 	public CLInterface() {
 		this(null);
@@ -20,7 +18,7 @@ public class CLInterface {
 	
 	public CLInterface(String welcomeMessage) {
 		mainMenu = new CLMenu("main", welcomeMessage);
-		currentMenu = mainMenu;
+		currentComposite = mainMenu;
 	}
 
 	public void addOption(CLOption option) {
@@ -35,12 +33,9 @@ public class CLInterface {
 			 message = null;
 		}
 		
-		if (currentForm!= null) {
-			screen.append(currentForm.getText());
-		} else {
-			screen.append(currentMenu.getMenuText());
+		if (currentComposite!= null) {
+			screen.append(currentComposite.getText());
 		}
-		
 		
 		screen.append("?> ");
 		
@@ -49,33 +44,34 @@ public class CLInterface {
 
 	public void choose(String key) {
 		
-		CLOption option = currentMenu.get(key);
-		if (option != null) {
+		if (currentComposite instanceof CLMenu) {
 			
-			if (option instanceof CLMenu) {
-				currentMenu = (CLMenu) option;
+			CLOption option = ((CLMenu)currentComposite).get(key);
+			
+			if (option != null) {
 				
-			} else if (option instanceof CLForm) {
-				
-				currentForm = (CLForm) option;
-				
-			} else if (option.getText().equals("Cancel")) {
-				
-				if (currentMenu == mainMenu) {
-					this.finished = true;
+				if (option instanceof CLCompositeOption) {
+					currentComposite = (CLCompositeOption) option;
+					
+				} else if (option.getText().equals("Cancel")) {
+					
+					if (currentComposite == mainMenu) {
+						this.finished = true;
+						
+					} else {
+						currentComposite = currentComposite.getSuperMenu();
+					}
 					
 				} else {
-					currentMenu = currentMenu.getSuperMenu();
+					option.run();
+					currentComposite = mainMenu;
 				}
 				
 			} else {
-				option.run();
-				currentMenu = mainMenu;
+				
+				message = "Invalid option!";
+				
 			}
-			
-		} else {
-			
-			message = "Invalid option!";
 			
 		}
 		

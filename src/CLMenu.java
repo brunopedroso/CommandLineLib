@@ -2,22 +2,19 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-public class CLMenu extends CLOption {
+public class CLMenu extends CLCompositeOption {
 	
 	Map<String, CLOption> options = new TreeMap<String, CLOption>();
 	int optionsIndex = 1;
-	private CLOption exitOption;
-	private CLMenu superMenu;
-	private String menuMessage;
-
+	
+	private CLOption exitOption = new CLOption("Cancel");
+	
 	public CLMenu(String optionText) {
 		this(optionText, null);
 	}
 
 	public CLMenu(String optionText, String message) {
-		super(optionText);
-		exitOption = new CLOption("Cancel");
-		this.menuMessage = message;
+		super(optionText, message);
 		options.put(Integer.toString(optionsIndex), exitOption);
 	}
 
@@ -31,19 +28,12 @@ public class CLMenu extends CLOption {
 		
 	}
 
-	private void setSuperMenu(CLMenu clMenu) {
-		superMenu = clMenu;
-	}
-
-	public CLMenu getSuperMenu() {
-		return superMenu;
-	}
-	
-	public String getMenuText() {
+	public String getText() {
 		StringBuffer screen = new StringBuffer();
 		
-		if (menuMessage != null) {
-			screen.append(menuMessage);
+		String presentationMessage = getPresentationMessage();
+		if (presentationMessage != null) {
+			screen.append(presentationMessage);
 			screen.append("\n");
 		}
 		
