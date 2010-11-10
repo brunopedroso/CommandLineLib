@@ -7,7 +7,6 @@ public class CLForm extends CLCompositeOption {
 	private int currentQuestion = 0;
 	
 	private List<CLQuestion> questions = new ArrayList<CLQuestion>();
-	private List<String> answers = new ArrayList<String>();
 
 	public CLForm(String optionText, String presentMessage) {
 		super(optionText, presentMessage);
@@ -23,7 +22,6 @@ public class CLForm extends CLCompositeOption {
 		}
 		
 		text.append(questions.get(currentQuestion).getText() + "\n");
-		currentQuestion++;
 		
 		return text.toString();
 	}
@@ -33,12 +31,13 @@ public class CLForm extends CLCompositeOption {
 		
 	}
 	
-	public List<String> getAnswers() {
-		return answers;
+	public List<CLQuestion> getQuestions() {
+		return questions;
 	}
 
 	public void answer(String answer) {
-		answers.add(answer);
+		questions.get(currentQuestion).answer(answer);
+		currentQuestion++;
 	}
 
 

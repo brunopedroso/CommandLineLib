@@ -75,12 +75,14 @@ public class CLFormTest {
 		cl.choose("Bruno");
 		cl.choose("32");
 		
-		List<String> answers = form.getAnswers();
+		List<CLQuestion> questions = form.getQuestions();
 		
-		Assert.assertEquals(2, answers.size());
-		Assert.assertEquals("Bruno", answers.get(0));
-		Assert.assertEquals("32", answers.get(1));
+		Assert.assertEquals(2, questions.size());
+		Assert.assertEquals("Bruno", questions.get(0).getAnswer());
+		Assert.assertEquals("32", questions.get(1).getAnswer());
 		
 	}
+	
+	//TODO finish after last question, execute action and return to main menu
 	
 }
