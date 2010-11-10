@@ -3,28 +3,52 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 
 
 public class CLFormTest {
 
+	private String formTitle;
+	private String enunce;
+	private CLForm form;
+	private String q1;
+	private String q2;
+	private CLInterface cl;
+
+	private boolean executed;
+	
+	@Before
+	public void setup() {
+		
+		formTitle = "Fill the name form";
+		enunce = "Personal questions";
+		form = new CLForm(formTitle, enunce) {
+			@Override
+			public void run() {
+				executed = true;	
+			};
+		};
+		
+		executed = false;
+		
+		q1 = "what is your name?";
+		q2 = "what is your age?";
+		form.addQuestion(q1);
+		form.addQuestion(q2);
+		
+		cl = new CLInterface("Testing forms");
+		cl.addOption(form);
+		
+	}
+	
 	@Test
 	public void shouldAskOneQuestion() {
 		
-		String optionText = "Fill the name form";
-		String presentMessage = "This is the name form, please answer the questions";
-		CLForm form = new CLForm(optionText, presentMessage);
-
-		String question = "what is your name?";
-		form.addQuestion(question);
-		
-		CLInterface cl = new CLInterface("Testing forms");
-		cl.addOption(form);
-		
 		cl.choose("1");
 		
-		String expected = presentMessage + "\n"
-						+ question + "\n"
+		String expected = enunce + "\n"
+						+ q1 + "\n"
 						+ "?> ";
 		
 		Assert.assertEquals(expected, cl.getScreen());
@@ -33,18 +57,6 @@ public class CLFormTest {
 	
 	@Test
 	public void shouldShowTheSeccondQuestion() {
-		
-		String optionText = "Fill the name form";
-		String enunce = "Personal questions";
-		CLForm form = new CLForm(optionText, enunce);
-		
-		String q1 = "what is your name?";
-		String q2 = "what is your age?";
-		form.addQuestion(q1);
-		form.addQuestion(q2);
-		
-		CLInterface cl = new CLInterface("Testing forms");
-		cl.addOption(form);
 		
 		cl.choose("1");
 		
@@ -56,19 +68,7 @@ public class CLFormTest {
 	}
 	
 	@Test
-	public void shouldExecuteTheFormWhenTheLastQuestionIsAnswered() {
-		
-		String optionText = "Fill the name form";
-		String enunce = "Personal questions";
-		CLForm form = new CLForm(optionText, enunce);
-		
-		String q1 = "what is your name?";
-		String q2 = "what is your age?";
-		form.addQuestion(q1);
-		form.addQuestion(q2);
-		
-		CLInterface cl = new CLInterface("Testing forms");
-		cl.addOption(form);
+	public void shouldAnswerTheQuestion() {
 		
 		cl.choose("1");
 		
@@ -83,6 +83,21 @@ public class CLFormTest {
 		
 	}
 	
+	@Test
+	public void shouldFinishTheFormAfterLastQuestion() {
+		
+		cl.choose("1");
+		Assert.assertFalse(executed);
+		
+		cl.choose("Bruno");
+		Assert.assertFalse(executed);
+		
+		cl.choose("32");
+		
+		Assert.assertTrue(executed);
+		
+	}
+
 	//TODO finish after last question, execute action and return to main menu
 	
 }
