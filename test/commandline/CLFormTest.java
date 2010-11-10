@@ -116,6 +116,25 @@ public class CLFormTest {
 		Assert.assertEquals(cl.getMainMenu().getText() + "?> ", cl.getScreen());
 		
 	}
+	
+	@Test
+	public void shouldResetAfterLastAnswer() {
+		
+		cl.answer("1");
+		Assert.assertFalse(executed);
+		
+		cl.answer("Bruno");
+		Assert.assertFalse(executed);
+		
+		cl.answer("32");
+		
+		Assert.assertEquals(cl.getMainMenu().getText() + "?> ", cl.getScreen());
+		
+		// if it doesnt reset, it throws an error
+		cl.answer("1");
+		cl.answer("Bruno");
+		
+	}
 
 	
 }

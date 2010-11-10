@@ -45,6 +45,9 @@ public class CLForm extends CLCompositeOption {
 			
 			run();
 			
+			// reset the form
+			currentQuestion = 0;
+			
 			// return to the main menu
 			return null;
 		}

@@ -20,12 +20,31 @@ public class TestCLInterface extends CLInterface{
 		CLMenu menu11 = new CLMenu("Another Manu", "This is Another Menu");
 		CLMenu menu2 = new CLMenu("Second Menu", "This is the Second Menu");
 
+		CLForm personalForm = new CLForm("Personal information", "Please, enter your personal information"){
+			@Override
+			public void run() {
+				System.out.println("you name is " + getQuestions().get(0).getAnswer());
+				System.out.println("you age is " + getQuestions().get(1).getAnswer());
+				System.out.println("you gender is " + getQuestions().get(2).getAnswer());
+				try {
+					System.in.read();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		personalForm.addQuestion("What is your name?");
+		personalForm.addQuestion("What is your age?");
+		personalForm.addQuestion("What is your gender?");
+		
+		
 		addOption(menu1);
 		addOption(menu2);
 		addOption(new CLOption("A single option"));
 		
 		menu1.addOption(menu11);
 		menu1.addOption(new CLOption("Do something"));
+		menu1.addOption(personalForm);
 		
 		menu2.addOption(new CLOption("Do something else"));
 		menu2.addOption(new CLOption("Do yet another thing"));
