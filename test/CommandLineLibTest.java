@@ -61,7 +61,7 @@ public class CommandLineLibTest {
 			}
 		});
 		
-		cl.choose("1");
+		cl.answer("1");
 		
 		Assert.assertEquals("should have executed the option", 1,list.size());
 	}
@@ -80,7 +80,7 @@ public class CommandLineLibTest {
 			}
 		});
 		
-		cl.choose("2");
+		cl.answer("2");
 		
 		Assert.assertEquals("should have executed the option", 1,list.size());
 	}
@@ -91,7 +91,7 @@ public class CommandLineLibTest {
 		CLInterface cl = new CLInterface();
 		cl.addOption(new CLOption("option one"));
 		
-		cl.choose("3");
+		cl.answer("3");
 		
 		String expectedScreen =   "Invalid option!\n"
 								+ "1 - option one\n" 
@@ -131,7 +131,7 @@ public class CommandLineLibTest {
 		CLInterface cl = new CLInterface();
 		cl.addOption(submenu);
 		
-		cl.choose("1");
+		cl.answer("1");
 		
 		String expectedScreen =	  "Please choose one of the options\n"
 								+ "1 - first option\n"

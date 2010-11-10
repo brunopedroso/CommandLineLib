@@ -15,6 +15,13 @@ public class CLCompositeOption extends CLOption {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
+	/**
+	 * should be overriden
+	 */
+	public CLCompositeOption answer(String answer) {
+		return null;
+	}
 
 
 }

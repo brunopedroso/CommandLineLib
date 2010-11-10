@@ -45,7 +45,7 @@ public class CLFormTest {
 	@Test
 	public void shouldAskOneQuestion() {
 		
-		cl.choose("1");
+		cl.answer("1");
 		
 		String expected = enunce + "\n"
 						+ q1 + "\n"
@@ -58,10 +58,10 @@ public class CLFormTest {
 	@Test
 	public void shouldShowTheSeccondQuestion() {
 		
-		cl.choose("1");
+		cl.answer("1");
 		
 		Assert.assertEquals(enunce + "\n" + q1 + "\n?> " , cl.getScreen());
-		cl.choose("Bruno");
+		cl.answer("Bruno");
 		
 		Assert.assertEquals(q2 + "\n?> " , cl.getScreen());
 		
@@ -70,10 +70,10 @@ public class CLFormTest {
 	@Test
 	public void shouldAnswerTheQuestion() {
 		
-		cl.choose("1");
+		cl.answer("1");
 		
-		cl.choose("Bruno");
-		cl.choose("32");
+		cl.answer("Bruno");
+		cl.answer("32");
 		
 		List<CLQuestion> questions = form.getQuestions();
 		
@@ -86,13 +86,13 @@ public class CLFormTest {
 	@Test
 	public void shouldRunTheFormAfterLastQuestion() {
 		
-		cl.choose("1");
+		cl.answer("1");
 		Assert.assertFalse(executed);
 		
-		cl.choose("Bruno");
+		cl.answer("Bruno");
 		Assert.assertFalse(executed);
 		
-		cl.choose("32");
+		cl.answer("32");
 		
 		Assert.assertTrue(executed);
 		
@@ -101,13 +101,13 @@ public class CLFormTest {
 	@Test
 	public void shouldReturnToMainMenuAfterLastAnswer() {
 		
-		cl.choose("1");
+		cl.answer("1");
 		Assert.assertFalse(executed);
 		
-		cl.choose("Bruno");
+		cl.answer("Bruno");
 		Assert.assertFalse(executed);
 		
-		cl.choose("32");
+		cl.answer("32");
 		
 		Assert.assertEquals(cl.getMainMenu().getText() + "?> ", cl.getScreen());
 		

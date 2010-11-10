@@ -18,7 +18,7 @@ public class CLMenuTest {
 		
 		cl.addOption(menu);
 		
-		cl.choose("1");
+		cl.answer("1");
 		
 		String expectedScreen =   "1 - sub option one\n"
 								+ "2 - sub option two\n"
@@ -47,10 +47,10 @@ public class CLMenuTest {
 		
 		cl.addOption(menu);
 		
-		cl.choose("1");
+		cl.answer("1");
 		Assert.assertEquals("should not have executed the option yet", 0,list.size());
 		
-		cl.choose("2");
+		cl.answer("2");
 		Assert.assertEquals("should have executed the option", 1,list.size());
 		
 	}
@@ -67,10 +67,10 @@ public class CLMenuTest {
 		
 		Assert.assertEquals("", cl.getMainMenu().getText() + "?> ",cl.getScreen());
 		
-		cl.choose("1");
+		cl.answer("1");
 		Assert.assertEquals("", menu.getText() + "?> ",cl.getScreen());
 		
-		cl.choose("2");
+		cl.answer("2");
 		Assert.assertEquals("", cl.getMainMenu().getText() + "?> ",cl.getScreen());
 		
 	}
@@ -90,13 +90,13 @@ public class CLMenuTest {
 		
 		Assert.assertEquals("", cl.getMainMenu().getText() + "?> ",cl.getScreen());
 		
-		cl.choose("1");
+		cl.answer("1");
 		Assert.assertEquals("", menu.getText() + "?> ",cl.getScreen());
 		
-		cl.choose("1");
+		cl.answer("1");
 		Assert.assertEquals("", submenu.getText() + "?> ",cl.getScreen());
 		
-		cl.choose("2");
+		cl.answer("2");
 		Assert.assertEquals("should bo back to the main menu", cl.getMainMenu().getText() + "?> ",cl.getScreen());
 		
 	}
@@ -122,15 +122,15 @@ public class CLMenuTest {
 		
 		cl.addOption(subMenu);
 		
-		cl.choose("1");
+		cl.answer("1");
 		Assert.assertEquals("should not have executed the option yet", 0,list.size());
 		Assert.assertEquals("", subMenu.getText() + "?> ",cl.getScreen());
 		
-		cl.choose("1");
+		cl.answer("1");
 		Assert.assertEquals("should not have executed the option yet", 0,list.size());
 		Assert.assertEquals("", subSubMenu.getText() + "?> ",cl.getScreen());
 		
-		cl.choose("2");
+		cl.answer("2");
 		Assert.assertEquals("should have executed the option", 1,list.size());
 		
 	}
@@ -143,7 +143,7 @@ public class CLMenuTest {
 		
 		Assert.assertFalse(cl.finished());
 		
-		cl.choose("2"); // exit
+		cl.answer("2"); // exit
 		Assert.assertTrue("should have finished", cl.finished());
 		
 	}
@@ -157,8 +157,8 @@ public class CLMenuTest {
 		CLInterface cl = new CLInterface();
 		cl.addOption(menu);
 		
-		cl.choose("1");
-		cl.choose("2"); // exit
+		cl.answer("1");
+		cl.answer("2"); // exit
 		
 		Assert.assertFalse("should not have finished", cl.finished());
 		Assert.assertEquals("", cl.getMainMenu().getText() + "?> ",cl.getScreen());
@@ -173,7 +173,7 @@ public class CLMenuTest {
 		CLInterface cl = new CLInterface();
 		cl.addOption(menu);
 		
-		cl.choose("1");
+		cl.answer("1");
 		
 		String expected = "1 - Cancel\n?> ";
 		Assert.assertEquals("", expected, cl.getScreen());
@@ -192,9 +192,9 @@ public class CLMenuTest {
 		CLInterface cl = new CLInterface();
 		cl.addOption(submenu);
 		
-		cl.choose("1");
-		cl.choose("1");
-		cl.choose("2"); // exit
+		cl.answer("1");
+		cl.answer("1");
+		cl.answer("2"); // exit
 		
 		Assert.assertFalse("should not have finished", cl.finished());
 		Assert.assertEquals("", submenu.getText() + "?> ",cl.getScreen());

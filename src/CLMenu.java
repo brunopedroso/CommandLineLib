@@ -9,6 +9,7 @@ public class CLMenu extends CLCompositeOption {
 	
 	//TODO is there a better way?
 	private CLOption exitOption = new CLOption("Cancel");
+	private String message;
 	
 	public CLMenu(String optionText) {
 		this(optionText, null);
@@ -33,6 +34,11 @@ public class CLMenu extends CLCompositeOption {
 	public String getText() {
 		StringBuffer screen = new StringBuffer();
 		
+		if (message != null) {
+			 screen.append(message + "\n");
+			 message = null;
+		}
+		
 		String menuText = super.getText();
 		if (menuText != null) {
 			screen.append(menuText);
@@ -48,9 +54,33 @@ public class CLMenu extends CLCompositeOption {
 		
 		return screen.toString();	}
 
-	//TODO tell dont ask?
-	public CLOption get(String key) {
-		return options.get(key);
+	@Override
+	public CLCompositeOption answer(String key) {
+		
+		CLOption option =  options.get(key);
+		
+		if (option != null) {
+			
+			if (option instanceof CLCompositeOption) {
+				return (CLCompositeOption) option;
+				
+			//TODO can it be done in a smarter way? finished?
+			} else if (option.getName().equals("Cancel")) {
+				return getSuperMenu();
+				
+			} else {
+				option.run();
+				return null;
+				
+			}
+			
+		} else {
+			
+			message = "Invalid option!";
+			return this;
+			
+		}
+		
 	}
 
 

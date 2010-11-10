@@ -9,7 +9,6 @@ public class CLInterface {
 	
 	CLCompositeOption currentComposite;
 	
-	String message;
 	private boolean finished;
 	
 	public CLInterface() {
@@ -28,11 +27,6 @@ public class CLInterface {
 	public String getScreen() {
 		StringBuffer screen = new StringBuffer();
 		
-		if (message != null) {
-			 screen.append(message + "\n");
-			 message = null;
-		}
-		
 		if (currentComposite!= null) {
 			screen.append(currentComposite.getText());
 		}
@@ -42,48 +36,19 @@ public class CLInterface {
 		return screen.toString();
 	}
 
-	//TODO should call answer() ?
-	public void choose(String key) {
+	public void answer(String key) {
 		
-		//TODO shouldnt each component know how to do its work?
-		
-		if (currentComposite instanceof CLMenu) {
-			
-			CLOption option = ((CLMenu)currentComposite).get(key);
-			
-			if (option != null) {
-				
-				if (option instanceof CLCompositeOption) {
-					currentComposite = (CLCompositeOption) option;
-					
-				} else if (option.getName().equals("Cancel")) {
-					//TODO can it be done in a smarter way? finished?
-					
-					if (currentComposite == mainMenu) {
-						this.finished = true;
-						
-					} else {
-						currentComposite = currentComposite.getSuperMenu();
-					}
-					
-				} else {
-					option.run();
-					currentComposite = mainMenu;
-				}
-				
+		CLCompositeOption result = currentComposite.answer(key);
+		if (result==null) {
+			if (currentComposite==mainMenu) {
+				finished=true;
 			} else {
-				
-				message = "Invalid option!";
-				
-			}
-			
-		} else if (currentComposite instanceof CLForm) {
-			currentComposite = ((CLForm)currentComposite).answer(key);
-			if (currentComposite==null) {
 				currentComposite = mainMenu;
 			}
+		} else {
+			currentComposite = result;
 		}
-		
+			
 	}
 
 	public CLMenu getMainMenu() {
@@ -95,7 +60,7 @@ public class CLInterface {
 		while(!finished()) {
 			System.out.print(getScreen());
 			String option = reader.readLine();
-			choose(option);
+			answer(option);
 		}
 	}
 
