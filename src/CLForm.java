@@ -4,9 +4,8 @@ import java.util.List;
 
 public class CLForm extends CLCompositeOption {
 
-	private int currentQuestion = 0;
-	
 	private List<CLQuestion> questions = new ArrayList<CLQuestion>();
+	private int currentQuestion = 0;
 
 	public CLForm(String optionText, String presentMessage) {
 		super(optionText, presentMessage);
@@ -17,7 +16,6 @@ public class CLForm extends CLCompositeOption {
 		StringBuffer text = new StringBuffer();
 		
 		if (currentQuestion==0) {
-			//TODO super text can be null
 			text.append(super.getText() + "\n");
 		}
 		
@@ -37,12 +35,20 @@ public class CLForm extends CLCompositeOption {
 
 	@Override
 	public CLCompositeOption answer(String answer) {
+		
 		questions.get(currentQuestion).answer(answer);
 		currentQuestion++;
+		
+		// form is full
 		if (currentQuestion==questions.size()) {
+			
 			run();
+			
+			// return to the main menu
 			return null;
 		}
+		
+		// maintain in this composite
 		return this;
 	}
 

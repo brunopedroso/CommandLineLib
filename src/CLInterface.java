@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 public class CLInterface {
 
@@ -24,6 +23,10 @@ public class CLInterface {
 		mainMenu.addOption(option);
 	}
 
+	/**
+	 * The current screen that will be shown to the user
+	 * @return
+	 */
 	public String getScreen() {
 		StringBuffer screen = new StringBuffer();
 		
@@ -36,17 +39,30 @@ public class CLInterface {
 		return screen.toString();
 	}
 
+	/**
+	 * Registers the input from the user
+	 * @param key
+	 */
 	public void answer(String key) {
 		
 		CLCompositeOption result = currentComposite.answer(key);
+		
+		// composite has finished
 		if (result==null) {
+			
+			// main menu has finished
 			if (currentComposite==mainMenu) {
 				finished=true;
+				
 			} else {
+				//any other menu has finished, go back to main menu
 				currentComposite = mainMenu;
 			}
+			
 		} else {
+			// go to the menu specified by the composite
 			currentComposite = result;
+			
 		}
 			
 	}

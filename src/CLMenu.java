@@ -18,9 +18,7 @@ public class CLMenu extends CLCompositeOption {
 	}
 
 	public void addOption(CLOption option) {
-		if (option instanceof CLMenu) {
-			((CLMenu)option).setSuperMenu(this);
-		}
+		option.setSuperMenu(this);
 		options.put(Integer.toString(optionsIndex), option);
 		optionsIndex++;
 		
