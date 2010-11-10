@@ -1,9 +1,14 @@
+package commandline;
 import java.util.List;
 
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import commandline.CLForm;
+import commandline.CLInterface;
+import commandline.CLQuestion;
 
 
 public class CLFormTest {

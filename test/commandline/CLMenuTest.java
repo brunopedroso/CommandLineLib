@@ -1,8 +1,13 @@
+package commandline;
 import java.util.ArrayList;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
+
+import commandline.CLInterface;
+import commandline.CLMenu;
+import commandline.CLOption;
 
 
 public class CLMenuTest {

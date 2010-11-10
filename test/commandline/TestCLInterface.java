@@ -1,8 +1,13 @@
+package commandline;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+
+import commandline.CLInterface;
+import commandline.CLMenu;
+import commandline.CLOption;
 
 
 public class TestCLInterface extends CLInterface{
