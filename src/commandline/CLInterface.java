@@ -85,6 +85,7 @@ public class CLInterface {
 	}
 
 	private void clearScreen() {
+		
 //		char[] cls = new char[100];
 //		for(int i=0;i<100;i++)
 //			cls[i]='\n';
