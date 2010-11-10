@@ -1,29 +1,29 @@
 
 public class CLOption {
 
-	private String text;
+	private String name;
 	private CLMenu superMenu;
 
-	public CLOption(String optionText) {
-		this.text = optionText;
+	public CLOption(String optionName) {
+		this.name = optionName;
 	}
 
-	public String getText() {
-		return text;
+	public String getName() {
+		return name;
 	}
 
-	/**
-	 * must be implemented by concrete CLOptions
-	 */
-	public void run() {
-	}
-	
 	public void setSuperMenu(CLMenu clMenu) {
 		superMenu = clMenu;
 	}
 
 	public CLMenu getSuperMenu() {
 		return superMenu;
+	}
+	
+	/**
+	 * must be implemented by concrete CLOptions
+	 */
+	public void run() {
 	}
 	
 

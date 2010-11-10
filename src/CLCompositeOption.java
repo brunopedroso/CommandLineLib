@@ -1,19 +1,20 @@
 
 public class CLCompositeOption extends CLOption {
 
-	private String presentationMessage;
+	private String text;
 
-	public String getPresentationMessage() {
-		return presentationMessage;
+	public CLCompositeOption(String name, String text) {
+		super(name);
+		this.text = text;
+	}
+	
+	public String getText() {
+		return text;
 	}
 
-	public void setPresentationMessage(String presentationMessage) {
-		this.presentationMessage = presentationMessage;
+	public void setText(String text) {
+		this.text = text;
 	}
 
-	public CLCompositeOption(String optionText, String presentMessage) {
-		super(optionText);
-		this.presentationMessage = presentMessage;
-	}
 
 }

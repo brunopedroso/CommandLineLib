@@ -44,6 +44,8 @@ public class CLInterface {
 
 	public void choose(String key) {
 		
+		//TODO shouldnt each component know how to do its work?
+		
 		if (currentComposite instanceof CLMenu) {
 			
 			CLOption option = ((CLMenu)currentComposite).get(key);
@@ -53,7 +55,8 @@ public class CLInterface {
 				if (option instanceof CLCompositeOption) {
 					currentComposite = (CLCompositeOption) option;
 					
-				} else if (option.getText().equals("Cancel")) {
+				} else if (option.getName().equals("Cancel")) {
+					//TODO can it be done in a smarter way? finished?
 					
 					if (currentComposite == mainMenu) {
 						this.finished = true;
@@ -73,6 +76,8 @@ public class CLInterface {
 				
 			}
 			
+		} else if (currentComposite instanceof CLForm) {
+			((CLForm)currentComposite).answer(key);
 		}
 		
 	}

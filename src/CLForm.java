@@ -4,9 +4,10 @@ import java.util.List;
 
 public class CLForm extends CLCompositeOption {
 
-	private int currentQuestion;
+	private int currentQuestion = 0;
 	
 	private List<CLQuestion> questions = new ArrayList<CLQuestion>();
+	private List<String> answers = new ArrayList<String>();
 
 	public CLForm(String optionText, String presentMessage) {
 		super(optionText, presentMessage);
@@ -17,10 +18,12 @@ public class CLForm extends CLCompositeOption {
 		StringBuffer text = new StringBuffer();
 		
 		if (currentQuestion==0) {
-			text.append(getPresentationMessage() + "\n");
+			//TODO super text can be null
+			text.append(super.getText() + "\n");
 		}
 		
 		text.append(questions.get(currentQuestion).getText() + "\n");
+		currentQuestion++;
 		
 		return text.toString();
 	}
@@ -29,5 +32,14 @@ public class CLForm extends CLCompositeOption {
 		questions.add(new CLQuestion(question));
 		
 	}
+	
+	public List<String> getAnswers() {
+		return answers;
+	}
+
+	public void answer(String answer) {
+		answers.add(answer);
+	}
+
 
 }
