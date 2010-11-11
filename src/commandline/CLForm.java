@@ -90,7 +90,7 @@ public class CLForm extends CLCompositeOption {
 				}
 				
 			} else {
-				message = Constants.TEXT_ERROR + "Valor inválido!" + Constants.TEXT_NORMAL;
+				message = "Valor inválido!";
 				
 			}
 			
