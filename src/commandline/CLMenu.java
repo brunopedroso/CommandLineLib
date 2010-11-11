@@ -31,22 +31,21 @@ public class CLMenu extends CLCompositeOption {
 		StringBuffer screen = new StringBuffer();
 		
 		if (message != null) {
-//			screen.append(Constants.TEXT_ERROR + message + Constants.TEXT_NORMAL + "\n");
 			screen.append(message + "\n");
 			message = null;
 		}
 		
 		String menuText = super.getText();
 		if (menuText != null) {
-//			screen.append(Constants.TEXT_TITLE);
+			screen.append(Constants.TEXT_TITLE);
 			screen.append(menuText);
 			screen.append("\n");
-//			screen.append(Constants.TEXT_NORMAL);
+			screen.append(Constants.TEXT_NORMAL);
 		}
 		
 		for (String key: options.keySet()) {
 			CLOption op = options.get(key);
-//			screen.append(Constants.TEXT_OPTIONS);
+			screen.append(Constants.TEXT_OPTIONS);
 			screen.append(key + " - ");
 			screen.append(op.getName());
 			screen.append("\n");
@@ -56,7 +55,7 @@ public class CLMenu extends CLCompositeOption {
 		screen.append("Cancelar");
 		screen.append("\n");
 		
-//		screen.append(Constants.TEXT_NORMAL);
+		screen.append(Constants.TEXT_NORMAL);
 		
 		return screen.toString();
 		
@@ -73,7 +72,7 @@ public class CLMenu extends CLCompositeOption {
 			}
 			
 		} catch (NumberFormatException e) {
-			message = "Opção inválida!";
+			message = "Op√ß√£o inv√°lida!";
 			return this;
 		}
 		
@@ -81,7 +80,7 @@ public class CLMenu extends CLCompositeOption {
 		CLOption option =  options.get(key);
 		
 		if (option == null) {
-			message = "Opção inválida!";
+			message = Constants.TEXT_ERROR + "Op√ß√£o inv√°lida!" + Constants.TEXT_NORMAL;
 			return this;
 		}
 			

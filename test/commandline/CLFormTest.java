@@ -93,7 +93,7 @@ public class CLFormTest {
 
 		for (int i = 0; i < 3; i++) {
 			cl.answer("NotANumber");
-			Assert.assertEquals("Valor inv‡lido!\n" + q2  + "\n", cl.getScreen());
+			Assert.assertEquals("Valor invÃ¡lido!\n" + q2  + "\n", cl.getScreen());
 		}
 		
 		cl.answer("123");

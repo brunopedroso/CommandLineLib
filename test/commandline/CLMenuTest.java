@@ -257,7 +257,7 @@ public class CLMenuTest {
 		
 		cl.answer("3");
 		
-		String expectedScreen =   "Opção inválida!\n"
+		String expectedScreen =   "Op√ß√£o inv√°lida!\n"
 								+ "1 - option one\n" 
 								+ "2 - Cancelar\n";
 
@@ -273,7 +273,7 @@ public class CLMenuTest {
 		
 		cl.answer("notAnumber");
 		
-		String expectedScreen =   "Opção inválida!\n"
+		String expectedScreen =   "Op√ß√£o inv√°lida!\n"
 								+ "1 - option one\n" 
 								+ "2 - Cancelar\n";
 
