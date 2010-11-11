@@ -7,6 +7,7 @@ public class CLForm extends CLCompositeOption {
 
 	private List<CLQuestion> questions = new ArrayList<CLQuestion>();
 	private int currentQuestion = 0;
+	private String result = null;
 
 	public CLForm(String optionText, String presentMessage) {
 		super(optionText, presentMessage);
@@ -14,6 +15,12 @@ public class CLForm extends CLCompositeOption {
 	
 	@Override
 	public String getText() {
+		
+		// already finished. I'll show the result
+		if (result!= null){
+			return result;
+		}
+		
 		StringBuffer text = new StringBuffer();
 		
 		if (currentQuestion==0) {
@@ -36,25 +43,34 @@ public class CLForm extends CLCompositeOption {
 
 	@Override
 	public CLCompositeOption answer(String answer) {
+
+		// have just ran
+		if (result!=null) {
+			
+			// reset the form
+			currentQuestion = 0;
+			result = null;
+			
+			// return to the main menu
+			return getSuperMenu();
+			
+		}
 		
 		questions.get(currentQuestion).answer(answer);
 		currentQuestion++;
 		
 		// form is full
 		if (currentQuestion==questions.size()) {
-			
 			run();
-			
-			// reset the form
-			currentQuestion = 0;
-			
-			// return to the main menu
-			return getSuperMenu();
 		}
 		
 		// maintain in this composite
 		return this;
 	}
 
+	public void setResult(String result) {
+		this.result = result;
+	}
+	
 
 }

@@ -21,6 +21,7 @@ public class CLFormTest {
 	private CLInterface cl;
 
 	private boolean executed;
+	private String expectedResult = "my results";
 	
 	@Before
 	public void setup() {
@@ -28,9 +29,11 @@ public class CLFormTest {
 		formTitle = "Fill the name form";
 		enunce = "Personal questions";
 		form = new CLForm(formTitle, enunce) {
+
 			@Override
 			public void run() {
-				executed = true;	
+				executed = true;
+				setResult(expectedResult);
 			};
 		};
 		
@@ -102,7 +105,7 @@ public class CLFormTest {
 	}
 	
 	@Test
-	public void shouldReturnToMainMenuAfterLastAnswer() {
+	public void shouldShowResultAfterLastAnswer() {
 		
 		cl.answer("1");
 		Assert.assertFalse(executed);
@@ -111,13 +114,31 @@ public class CLFormTest {
 		Assert.assertFalse(executed);
 		
 		cl.answer("32");
+		
+		Assert.assertEquals(expectedResult , cl.getScreen());
+		
+	}
+	
+	@Test
+	public void shouldReturnToMainMenuAfterConfrmResult() {
+		
+		cl.answer("1");
+		Assert.assertFalse(executed);
+		
+		cl.answer("Bruno");
+		Assert.assertFalse(executed);
+		
+		cl.answer("32");
+		
+		// confirm: i've seen the results
+		cl.answer("");
 		
 		Assert.assertEquals(cl.getMainMenu().getText() , cl.getScreen());
 		
 	}
 	
 	@Test
-	public void shouldResetAfterLastAnswer() {
+	public void shouldResetAfterConfrmResult() {
 		
 		cl.answer("1");
 		Assert.assertFalse(executed);
@@ -126,6 +147,9 @@ public class CLFormTest {
 		Assert.assertFalse(executed);
 		
 		cl.answer("32");
+		
+		// confirm: i've seen the results
+		cl.answer("");
 		
 		Assert.assertEquals(cl.getMainMenu().getText(), cl.getScreen());
 		

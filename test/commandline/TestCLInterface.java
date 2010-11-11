@@ -15,14 +15,11 @@ public class TestCLInterface extends CLInterface{
 		CLForm personalForm = new CLForm("Personal information", "Please, enter your personal information"){
 			@Override
 			public void run() {
-				System.out.println("you name is " + getQuestions().get(0).getAnswer());
-				System.out.println("you age is " + getQuestions().get(1).getAnswer());
-				System.out.println("you gender is " + getQuestions().get(2).getAnswer());
-				try {
-					System.in.read();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				
+				setResult("you name is " + getQuestions().get(0).getAnswer() + "\n"
+							+ "you age is " + getQuestions().get(1).getAnswer()  + "\n"
+							+ "you gender is " + getQuestions().get(2).getAnswer() + "\n");
+				
 			}
 		};
 		personalForm.addQuestion("What is your name?");
