@@ -72,7 +72,7 @@ public class CLMenu extends CLCompositeOption {
 			}
 			
 		} catch (NumberFormatException e) {
-			message = "Opção inválida!";
+			message = Constants.TEXT_ERROR + "Opção inválida!" + Constants.TEXT_NORMAL;
 			return this;
 		}
 		
@@ -80,7 +80,8 @@ public class CLMenu extends CLCompositeOption {
 		CLOption option =  options.get(key);
 		
 		if (option == null) {
-			message = "Opção inválida!";
+			//TODO method setErrorMessage
+			message = Constants.TEXT_ERROR + "Opção inválida!" + Constants.TEXT_NORMAL;
 			return this;
 		}
 			
