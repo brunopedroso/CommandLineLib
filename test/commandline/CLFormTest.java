@@ -41,7 +41,7 @@ public class CLFormTest {
 		form.addQuestion(q1);
 		form.addQuestion(q2);
 		
-		cl = new CLInterface("Testing forms");
+		cl = new CLInterface();
 		cl.addOption(form);
 		
 	}

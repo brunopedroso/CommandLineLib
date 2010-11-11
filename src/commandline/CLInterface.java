@@ -10,13 +10,21 @@ public class CLInterface {
 	CLCompositeOption currentComposite;
 	
 	private boolean finished;
+
+	private String welcomeMessage;
+	private boolean welcomeShown = false;
 	
 	public CLInterface() {
 		this(null);
 	}
 	
 	public CLInterface(String welcomeMessage) {
-		mainMenu = new CLMenu("main", welcomeMessage);
+		this(welcomeMessage, null);
+	}
+	
+	public CLInterface(String welcomeMessage, String mainMenuMessage) {
+		mainMenu = new CLMenu("main", mainMenuMessage);
+		this.welcomeMessage = welcomeMessage;
 		currentComposite = mainMenu;
 	}
 
@@ -31,6 +39,12 @@ public class CLInterface {
 	public String getScreen() {
 		StringBuffer screen = new StringBuffer();
 		
+		if (!welcomeShown && welcomeMessage != null) {
+			screen.append(welcomeMessage);
+			screen.append("\n");
+			welcomeShown=true;
+		}
+			
 		if (currentComposite!= null) {
 			screen.append(currentComposite.getText());
 		}
@@ -74,6 +88,7 @@ public class CLInterface {
 	
 	public void run() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		
 		while(!finished()) {
 			
 			clearScreen();

@@ -107,22 +107,33 @@ public class CommandLineLibTest {
 	}
 	
 	@Test
-	public void shouldShowTheMenuMessage() {
+	public void shouldShowTheWelcomeMessageJustOnTheFirstTime() {
 		
-		CLMenu submenu = new CLMenu("submenu", "Please choose one of the options");
-		submenu.addOption(new CLOption("first option"));
+		CLInterface cl = new CLInterface("Hi, this is the welcome message", "and this is the mainMenu message");
 		
-		CLInterface cl = new CLInterface();
-		cl.addOption(submenu);
+		CLOption firstOption = new CLOption("option one"); 
 		
-		cl.answer("1");
+		cl.addOption(firstOption);
 		
-		String expectedScreen =	  "Please choose one of the options\n"
-								+ "1 - first option\n"
-								+ "2 - Cancelar\n";
+		String expectedScreen =	  "Hi, this is the welcome message\n" 
+			+ "and this is the mainMenu message\n"
+			+ "1 - option one\n"
+			+ "2 - Cancelar\n";
+		
+		Assert.assertEquals(expectedScreen, cl.getScreen());
+		
+		expectedScreen = "and this is the mainMenu message\n"
+			+ "1 - option one\n"
+			+ "2 - Cancelar\n";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
 	}
+	
+	
+	//TODO executar opção no main fica no main
+	//TODO resposta do form - o run chama um setResult() que vira o getText() no final e aguarda o enter automático
+	//TODO validation of form data (guarta o object)
+	//TODO getAnswer(i) no form
 
 }

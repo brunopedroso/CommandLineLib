@@ -13,6 +13,25 @@ import commandline.CLOption;
 public class CLMenuTest {
 
 	@Test
+	public void shouldShowTheMenuMessage() {
+		
+		CLMenu submenu = new CLMenu("submenu", "Please choose one of the options");
+		submenu.addOption(new CLOption("first option"));
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(submenu);
+		
+		cl.answer("1");
+		
+		String expectedScreen =	  "Please choose one of the options\n"
+								+ "1 - first option\n"
+								+ "2 - Cancelar\n";
+		
+		Assert.assertEquals(expectedScreen, cl.getScreen());
+		
+	}
+	
+	@Test
 	public void shouldShowTheSubmenu() {
 		
 		CLInterface cl = new CLInterface();
