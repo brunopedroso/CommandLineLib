@@ -59,8 +59,9 @@ public class CommandLineLibTest {
 		final ArrayList<String> list = new ArrayList<String>(); 
 		
 		cl.addOption(new CLOption("option one") {
-			public void run() {
+			public String run() {
 				list.add("executed!");
+				return null;
 			}
 		});
 		
@@ -78,8 +79,9 @@ public class CommandLineLibTest {
 		
 		cl.addOption(new CLOption("option one"));
 		cl.addOption(new CLOption("option two") {
-			public void run() {
+			public String run() {
 				list.add("executed!");
+				return null;
 			}
 		});
 		
@@ -88,6 +90,23 @@ public class CommandLineLibTest {
 		Assert.assertEquals("should have executed the option", 1,list.size());
 	}
 	
+	@Test
+	public void shouldShowResultOfExecutedOption() {
+		
+		CLInterface cl = new CLInterface();
+		
+		cl.addOption(new CLOption("option one"));
+		cl.addOption(new CLOption("option two") {
+			public String run() {
+				return "I have executed.";
+			}
+		});
+		
+		cl.answer("2");
+		
+		Assert.assertTrue(cl.getScreen().startsWith("I have executed."));
+		
+	}
 	
 	@Test
 	public void shouldShowTheWelcomeMessage() {
@@ -130,7 +149,6 @@ public class CommandLineLibTest {
 		
 	}
 	
-	//TODO show results from a single option
 	//TODO validation of form data (guarta o object)
 	//TODO getAnswer(i) no form
 

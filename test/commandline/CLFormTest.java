@@ -31,9 +31,9 @@ public class CLFormTest {
 		form = new CLForm(formTitle, enunce) {
 
 			@Override
-			public void run() {
+			public String run() {
 				executed = true;
-				setResult(expectedResult);
+				return expectedResult;
 			};
 		};
 		
@@ -115,7 +115,7 @@ public class CLFormTest {
 		
 		cl.answer("32");
 		
-		Assert.assertEquals(expectedResult , cl.getScreen());
+		Assert.assertEquals(expectedResult + "\n" , cl.getScreen());
 		
 	}
 	

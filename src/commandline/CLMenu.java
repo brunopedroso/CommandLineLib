@@ -89,7 +89,7 @@ public class CLMenu extends CLCompositeOption {
 			return (CLCompositeOption) option;
 			
 		} else {
-			option.run();
+			message = option.run();
 			return getSuperMenu();
 			
 		}

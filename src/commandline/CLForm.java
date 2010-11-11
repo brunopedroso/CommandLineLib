@@ -16,20 +16,28 @@ public class CLForm extends CLCompositeOption {
 	@Override
 	public String getText() {
 		
-		// already finished. I'll show the result
-		if (result!= null){
-			return result;
-		}
-		
 		StringBuffer text = new StringBuffer();
 		
-		if (currentQuestion==0) {
-			text.append(super.getText() + "\n");
+		// already finished. I'll show the result
+		if (result!= null){
+			
+			text.append(result);
+			text.append("\n");
+			
+		} else {
+			
+			if (currentQuestion==0) {
+				text.append(super.getText());
+				text.append("\n");
+			}
+			
+			text.append(questions.get(currentQuestion).getText());
+			text.append("\n");
+			
 		}
 		
-		text.append(questions.get(currentQuestion).getText() + "\n");
-		
 		return text.toString();
+		
 	}
 
 	public void addQuestion(String question) {
@@ -51,26 +59,25 @@ public class CLForm extends CLCompositeOption {
 			currentQuestion = 0;
 			result = null;
 			
-			// return to the main menu
+			// return to the parent menu
 			return getSuperMenu();
+			
+		} else {
+			
+			questions.get(currentQuestion).answer(answer);
+			currentQuestion++;
+			
+			// this was the last question
+			if (currentQuestion==questions.size()) {
+				result = run();
+			}
+			
+			// maintain in this composite
+			return this;
 			
 		}
 		
-		questions.get(currentQuestion).answer(answer);
-		currentQuestion++;
-		
-		// form is full
-		if (currentQuestion==questions.size()) {
-			run();
-		}
-		
-		// maintain in this composite
-		return this;
 	}
 
-	public void setResult(String result) {
-		this.result = result;
-	}
-	
 
 }

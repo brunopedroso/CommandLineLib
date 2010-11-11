@@ -63,8 +63,9 @@ public class CLMenuTest {
 		menu.addOption(new CLOption("sub option one"));
 		menu.addOption(new CLOption("sub option two") {
 			@Override
-			public void run() {
+			public String run() {
 				list.add("executed!");
+				return null;
 			}
 		});
 		
@@ -156,8 +157,9 @@ public class CLMenuTest {
 		subSubMenu.addOption(new CLOption("option one-one-one"));
 		subSubMenu.addOption(new CLOption("option one-one-two") {
 			@Override
-			public void run() {
+			public String run() {
 				list.add("executed!");
+				return null;
 			}
 		});
 		

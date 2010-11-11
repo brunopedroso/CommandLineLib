@@ -14,11 +14,11 @@ public class TestCLInterface extends CLInterface{
 
 		CLForm personalForm = new CLForm("Personal information", "Please, enter your personal information"){
 			@Override
-			public void run() {
+			public String run() {
 				
-				setResult("you name is " + getQuestions().get(0).getAnswer() + "\n"
+				return "you name is " + getQuestions().get(0).getAnswer() + "\n"
 							+ "you age is " + getQuestions().get(1).getAnswer()  + "\n"
-							+ "you gender is " + getQuestions().get(2).getAnswer() + "\n");
+							+ "you gender is " + getQuestions().get(2).getAnswer() + "\n";
 				
 			}
 		};
@@ -31,8 +31,8 @@ public class TestCLInterface extends CLInterface{
 		addOption(menu2);
 		addOption(new CLOption("A single option"){
 			@Override
-			public void run() {
-				System.out.println("Something done!");
+			public String run() {
+				return "Something done!";
 			}
 		});
 		
