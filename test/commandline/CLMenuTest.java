@@ -79,6 +79,27 @@ public class CLMenuTest {
 	}
 	
 	@Test
+	public void shouldRemainInTheMainMenuWhenExecutedAnActionFromTheMainMenu() {
+		
+		CLInterface cl = new CLInterface();
+		cl.addOption(new CLOption("first option"));
+		
+		Assert.assertFalse(cl.finished());
+		
+		cl.answer("1");
+		
+		Assert.assertFalse("should not have finished", cl.finished());
+		
+		String expectedScreen =	  
+			  "1 - first option\n"
+			+ "2 - Cancelar\n";
+
+		Assert.assertEquals(expectedScreen, cl.getScreen());
+
+		
+	}
+	
+	@Test
 	public void shouldReturnToMainMenuAfterOptionExecution() {
 		
 		CLMenu menu = new CLMenu("option one");
@@ -99,7 +120,7 @@ public class CLMenuTest {
 	}
 	
 	@Test
-	public void shouldReturnToMainMenuAfterSubOptionExecution() {
+	public void shouldReturnToParentMenuAfterSubOptionExecution() {
 		
 		CLMenu submenu = new CLMenu("option one-one");
 		submenu.addOption(new CLOption("sub option one-one-one"));
@@ -120,7 +141,7 @@ public class CLMenuTest {
 		Assert.assertEquals("", submenu.getText(),cl.getScreen());
 		
 		cl.answer("2");
-		Assert.assertEquals("should bo back to the main menu", cl.getMainMenu().getText(),cl.getScreen());
+		Assert.assertEquals("should bo back to the parent menu", menu.getText(),cl.getScreen());
 		
 	}
 	
@@ -170,6 +191,8 @@ public class CLMenuTest {
 		Assert.assertTrue("should have finished", cl.finished());
 		
 	}
+	
+
 	
 	@Test
 	public void shouldReturnToMainMenuWhenCancelIsChoosenInSub() {

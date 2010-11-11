@@ -9,8 +9,6 @@ public class CLInterface {
 	
 	CLCompositeOption currentComposite;
 	
-	private boolean finished;
-
 	private String welcomeMessage;
 	private boolean welcomeShown = false;
 	
@@ -62,22 +60,9 @@ public class CLInterface {
 		
 		CLCompositeOption result = currentComposite.answer(key);
 		
-		// composite has finished
-		if (result==null) {
-			
-			// main menu has finished
-			if (currentComposite==mainMenu) {
-				finished=true;
-				
-			} else {
-				//any other menu has finished, go back to main menu
-				currentComposite = mainMenu;
-			}
-			
-		} else {
+		if (result!=null) {
 			// go to the menu specified by the composite
 			currentComposite = result;
-			
 		}
 			
 	}
@@ -115,7 +100,7 @@ public class CLInterface {
 	}
 
 	public boolean finished() {
-		return finished;
+		return mainMenu.finished();
 	}
 
 }

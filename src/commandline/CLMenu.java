@@ -9,6 +9,7 @@ public class CLMenu extends CLCompositeOption {
 	int optionsIndex = 1;
 	
 	private String message;
+	private boolean finished;
 	
 	public CLMenu(String optionText) {
 		this(optionText, null);
@@ -57,7 +58,9 @@ public class CLMenu extends CLCompositeOption {
 		
 //		screen.append(Constants.TEXT_NORMAL);
 		
-		return screen.toString();	}
+		return screen.toString();
+		
+	}
 
 	@Override
 	public CLCompositeOption answer(String key) {
@@ -65,8 +68,10 @@ public class CLMenu extends CLCompositeOption {
 		try {
 			// cancel option choosen
 			if (Integer.parseInt(key) == optionsIndex) {
+				finished=true;
 				return getSuperMenu();
-			} 
+			}
+			
 		} catch (NumberFormatException e) {
 			message = "Opção inválida!";
 			return this;
@@ -85,11 +90,15 @@ public class CLMenu extends CLCompositeOption {
 			
 		} else {
 			option.run();
-			return null;
+			return getSuperMenu();
 			
 		}
 			
 		
+	}
+
+	public boolean finished() {
+		return finished;
 	}
 
 

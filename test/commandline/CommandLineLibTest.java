@@ -130,8 +130,6 @@ public class CommandLineLibTest {
 		
 	}
 	
-	
-	//TODO executar opção no main fica no main
 	//TODO resposta do form - o run chama um setResult() que vira o getText() no final e aguarda o enter automático
 	//TODO validation of form data (guarta o object)
 	//TODO getAnswer(i) no form

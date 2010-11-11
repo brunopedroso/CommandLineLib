@@ -49,7 +49,7 @@ public class CLForm extends CLCompositeOption {
 			currentQuestion = 0;
 			
 			// return to the main menu
-			return null;
+			return getSuperMenu();
 		}
 		
 		// maintain in this composite
