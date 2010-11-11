@@ -23,7 +23,16 @@ public class TestCLInterface extends CLInterface{
 			}
 		};
 		personalForm.addQuestion("What is your name?");
-		personalForm.addQuestion("What is your age?");
+		personalForm.addQuestion("What is your age?", new AnswerValidator() {
+			public boolean isAnswerValid(String answer) {
+				try {
+					Integer.parseInt(answer);
+				} catch (NumberFormatException e) {
+					return false;
+				}
+				return true;
+			}
+		});
 		personalForm.addQuestion("What is your gender?");
 		
 		

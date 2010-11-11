@@ -89,9 +89,7 @@ public class CLForm extends CLCompositeOption {
 					result = run();
 				}
 				
-				
 			} else {
-				
 				message = "Valor inv‡lido!";
 				
 			}
