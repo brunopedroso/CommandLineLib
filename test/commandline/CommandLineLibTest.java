@@ -23,8 +23,7 @@ public class CommandLineLibTest {
 		cl.addOption(firstOption);
 		
 		String expectedScreen =   "1 - " + optionText + "\n"
-								+ "2 - Cancel\n"
-								+ "?> ";
+								+ "2 - Cancelar\n";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
@@ -46,8 +45,7 @@ public class CommandLineLibTest {
 		
 		String expectedScreen = "1 - " + optionText + "\n" 
 							  + "2 - " + optionText2 + "\n"
-							  + "3 - Cancel\n"
-							  + "?> ";
+							  + "3 - Cancelar\n";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
@@ -102,8 +100,7 @@ public class CommandLineLibTest {
 		
 		String expectedScreen =	  "Hi, this is the welcome message\n"   
 								+ "1 - option one\n"
-								+ "2 - Cancel\n"
-								+ "?> ";
+								+ "2 - Cancelar\n";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		
@@ -122,8 +119,7 @@ public class CommandLineLibTest {
 		
 		String expectedScreen =	  "Please choose one of the options\n"
 								+ "1 - first option\n"
-								+ "2 - Cancel\n"
-								+ "?> ";
+								+ "2 - Cancelar\n";
 		
 		Assert.assertEquals(expectedScreen, cl.getScreen());
 		

@@ -52,8 +52,7 @@ public class CLFormTest {
 		cl.answer("1");
 		
 		String expected = enunce + "\n"
-						+ q1 + "\n"
-						+ "?> ";
+						+ q1 + "\n";
 		
 		Assert.assertEquals(expected, cl.getScreen());
 		
@@ -64,10 +63,10 @@ public class CLFormTest {
 		
 		cl.answer("1");
 		
-		Assert.assertEquals(enunce + "\n" + q1 + "\n?> " , cl.getScreen());
+		Assert.assertEquals(enunce + "\n" + q1 + "\n", cl.getScreen());
 		cl.answer("Bruno");
 		
-		Assert.assertEquals(q2 + "\n?> " , cl.getScreen());
+		Assert.assertEquals(q2  + "\n", cl.getScreen());
 		
 	}
 	
@@ -113,7 +112,7 @@ public class CLFormTest {
 		
 		cl.answer("32");
 		
-		Assert.assertEquals(cl.getMainMenu().getText() + "?> ", cl.getScreen());
+		Assert.assertEquals(cl.getMainMenu().getText() , cl.getScreen());
 		
 	}
 	
@@ -128,7 +127,7 @@ public class CLFormTest {
 		
 		cl.answer("32");
 		
-		Assert.assertEquals(cl.getMainMenu().getText() + "?> ", cl.getScreen());
+		Assert.assertEquals(cl.getMainMenu().getText(), cl.getScreen());
 		
 		// if it doesnt reset, it throws an error
 		cl.answer("1");

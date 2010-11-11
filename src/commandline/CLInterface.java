@@ -35,7 +35,7 @@ public class CLInterface {
 			screen.append(currentComposite.getText());
 		}
 		
-		screen.append("?> ");
+//		screen.append("?> ");
 		
 		return screen.toString();
 	}
@@ -78,7 +78,9 @@ public class CLInterface {
 			
 			clearScreen();
 			
-			System.out.print(getScreen());
+			System.out.println(getScreen());
+			System.out.print("?> ");
+			
 			String option = reader.readLine();
 			answer(option);
 		}
