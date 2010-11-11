@@ -42,7 +42,16 @@ public class CLFormTest {
 		q1 = "what is your name?";
 		q2 = "what is your age?";
 		form.addQuestion(q1);
-		form.addQuestion(q2);
+		form.addQuestion(q2, new AnswerValidator(){
+			public boolean isAnswerValid(String answer){
+				try {
+					Integer.parseInt(answer);
+					return true;
+				} catch (NumberFormatException e) {
+					return false;
+				}
+			}
+		});
 		
 		cl = new CLInterface();
 		cl.addOption(form);
@@ -70,6 +79,26 @@ public class CLFormTest {
 		cl.answer("Bruno");
 		
 		Assert.assertEquals(q2  + "\n", cl.getScreen());
+		
+	}
+	
+	@Test
+	public void shouldShowTheSeccondQuestionAgainIWhileTheAnswerIsNotValid() {
+		
+		cl.answer("1");
+		
+		cl.answer("Bruno");
+		
+		Assert.assertEquals(q2  + "\n", cl.getScreen());
+
+		for (int i = 0; i < 3; i++) {
+			cl.answer("NotANumber");
+			Assert.assertEquals("Valor inv‡lido!\n" + q2  + "\n", cl.getScreen());
+		}
+		
+		cl.answer("123");
+		
+		Assert.assertEquals(expectedResult + "\n" , cl.getScreen());
 		
 	}
 	

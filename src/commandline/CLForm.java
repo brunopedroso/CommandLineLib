@@ -8,6 +8,7 @@ public class CLForm extends CLCompositeOption {
 	private List<CLQuestion> questions = new ArrayList<CLQuestion>();
 	private int currentQuestion = 0;
 	private String result = null;
+	private String message;
 
 	public CLForm(String optionText, String presentMessage) {
 		super(optionText, presentMessage);
@@ -31,6 +32,12 @@ public class CLForm extends CLCompositeOption {
 				text.append("\n");
 			}
 			
+			if (message!=null) {
+				text.append(message);
+				text.append("\n");
+				message = null;
+			}
+			
 			text.append(questions.get(currentQuestion).getText());
 			text.append("\n");
 			
@@ -41,9 +48,18 @@ public class CLForm extends CLCompositeOption {
 	}
 
 	public void addQuestion(String question) {
-		questions.add(new CLQuestion(question));
+		this.addQuestion(question, new AnswerValidator() {
+			public boolean isAnswerValid(String answer) {
+				return true;
+			}
+		});
 		
 	}
+	
+	public void addQuestion(String question, AnswerValidator answerValidator) {
+		questions.add(new CLQuestion(question, answerValidator));
+	}
+
 	
 	public String getAnswer(int i) {
 		return questions.get(i).getAnswer();
@@ -64,12 +80,20 @@ public class CLForm extends CLCompositeOption {
 			
 		} else {
 			
-			questions.get(currentQuestion).answer(answer);
-			currentQuestion++;
-			
-			// this was the last question
-			if (currentQuestion==questions.size()) {
-				result = run();
+			if (questions.get(currentQuestion).answer(answer)){
+				
+				currentQuestion++;
+				
+				// this was the last question
+				if (currentQuestion==questions.size()) {
+					result = run();
+				}
+				
+				
+			} else {
+				
+				message = "Valor inv‡lido!";
+				
 			}
 			
 			// maintain in this composite
@@ -78,6 +102,5 @@ public class CLForm extends CLCompositeOption {
 		}
 		
 	}
-
 
 }
