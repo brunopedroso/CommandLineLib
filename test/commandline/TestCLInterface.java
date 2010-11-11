@@ -16,9 +16,9 @@ public class TestCLInterface extends CLInterface{
 			@Override
 			public String run() {
 				
-				return "you name is " + getQuestions().get(0).getAnswer() + "\n"
-							+ "you age is " + getQuestions().get(1).getAnswer()  + "\n"
-							+ "you gender is " + getQuestions().get(2).getAnswer() + "\n";
+				return "you name is " + getAnswer(0) + "\n"
+							+ "you age is " + getAnswer(1)  + "\n"
+							+ "you gender is " + getAnswer(2) + "\n";
 				
 			}
 		};

@@ -149,7 +149,6 @@ public class CommandLineLibTest {
 		
 	}
 	
-	//TODO validation of form data (guarta o object)
-	//TODO getAnswer(i) no form
+	//TODO validation of form data (guarda o object logo..)
 
 }

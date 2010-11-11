@@ -45,8 +45,8 @@ public class CLForm extends CLCompositeOption {
 		
 	}
 	
-	public List<CLQuestion> getQuestions() {
-		return questions;
+	public String getAnswer(int i) {
+		return questions.get(i).getAnswer();
 	}
 
 	@Override
