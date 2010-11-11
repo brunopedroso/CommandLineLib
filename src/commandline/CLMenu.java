@@ -80,6 +80,7 @@ public class CLMenu extends CLCompositeOption {
 		CLOption option =  options.get(key);
 		
 		if (option == null) {
+			//TODO create methods setMessage and setErrorMessage
 			message = Constants.TEXT_ERROR + "Opção inválida!" + Constants.TEXT_NORMAL;
 			return this;
 		}
